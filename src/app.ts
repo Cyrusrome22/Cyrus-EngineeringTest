@@ -10,6 +10,7 @@ import swaggerDocs from '@/swagger/swagger';
 class App {
   public express: Express;
   public port: number;
+  public server: any;
 
   constructor(controllers: Controller[], port: number) {
     this.express = express();
@@ -23,7 +24,11 @@ class App {
   private initializeMiddleware(): void {
     this.express.use(helmet());
     this.express.use(cors());
-    this.express.use(morgan('dev'));
+    this.express.use(
+      morgan('dev', {
+        skip: (req, res) => process.env.NODE_ENV === 'test',
+      })
+    );
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
     this.express.use(compression());
@@ -40,7 +45,7 @@ class App {
   }
 
   public listen(): void {
-    this.express.listen(this.port, () => {
+    this.server = this.express.listen(this.port, () => {
       console.log(`App listening on port ${this.port}`);
       swaggerDocs(this.express, this.port);
     });

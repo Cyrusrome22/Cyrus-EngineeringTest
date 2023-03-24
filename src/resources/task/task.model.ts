@@ -4,6 +4,13 @@ import Task, { TaskStatus } from './task.interface';
 class TaskModel {
   private data: Task[] = [];
 
+  public async clearData(): Promise<void> {
+    return new Promise((resolve) => {
+      this.data = [];
+      resolve();
+    });
+  }
+
   public async findTask(id: string): Promise<Task> {
     return new Promise((resolve, reject) => {
       const task: Task | undefined = this.data.find(

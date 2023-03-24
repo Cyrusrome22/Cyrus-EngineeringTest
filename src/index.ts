@@ -2,7 +2,7 @@ import 'dotenv/config';
 import 'module-alias/register';
 import validateEnv from '@/utils/validateEnv';
 import App from './app';
-import TaskController from './resources/task/task.controller';
+import TaskController from '@/resources/task/task.controller';
 
 validateEnv();
 
