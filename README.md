@@ -33,3 +33,7 @@
    ![My Image](screenshots/error3.PNG)
    ![My Image](screenshots/error4.PNG)
 
+4. Reorder
+   ![My Image](screenshots/reorder.PNG)
+   ![My Image](screenshots/reorder2.PNG)
+   ![My Image](screenshots/reorder3.PNG)
