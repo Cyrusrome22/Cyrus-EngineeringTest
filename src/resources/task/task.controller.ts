@@ -63,6 +63,11 @@ class TaskController implements Controller {
   ) => {
     try {
       const { id } = req.params;
+
+      if (!id) {
+        return next(new BadRequestException('Id is required'));
+      }
+
       const task = await this.taskService.get(id);
       res.status(200).json(task);
     } catch (err: any) {
@@ -87,6 +92,11 @@ class TaskController implements Controller {
     try {
       const { id } = req.params;
       const { title, description, status } = req.body;
+
+      if (!id) {
+        return next(new BadRequestException('Id is required'));
+      }
+
       const task = await this.taskService.update(
         id,
         title,
@@ -106,6 +116,11 @@ class TaskController implements Controller {
   ) => {
     try {
       const { id } = req.params;
+
+      if (!id) {
+        return next(new BadRequestException('Id is required'));
+      }
+
       const task = await this.taskService.delete(id);
       res.status(200).json(task);
     } catch (err: any) {

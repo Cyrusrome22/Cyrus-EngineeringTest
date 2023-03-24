@@ -70,6 +70,8 @@ class TaskService {
 
     if (position > tasks.length - 1) {
       position = tasks.length - 1;
+    } else if (position < 0) {
+      position = 0;
     }
 
     tasks.splice(position, 0, task);

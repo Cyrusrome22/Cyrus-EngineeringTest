@@ -7,4 +7,5 @@ import TaskController from './resources/task/task.controller';
 validateEnv();
 
 const app = new App([new TaskController()], Number(process.env.PORT));
+
 app.listen();

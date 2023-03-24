@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Task Rest API Documentation"
+  },
+  "tags": [
+    {
+      "name": "Tasks",
+      "description": "API for tasks in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/tasks": {
+      "get": {
+        "summary": "Get all tasks",
+        "tags": ["Tasks"],
+        "description": "1. The user should be able to list all tasks in the TODO list",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All Task provided"
+          },
+          "500": {
+            "description": "Something went wrong."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add task",
+        "tags": ["Tasks"],
+        "description": "2. The user should be able to add a task to the TODO list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "title": "Buy Groceries",
+                  "description": "To buy groceries at the store"
+                }
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Task added"
+          }
+        }
+      }
+    },
+    "/api/tasks/{id}": {
+      "get": {
+        "summary": "Get a task",
+        "tags": ["Tasks"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of task"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task retrieved"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update task",
+        "tags": ["Tasks"],
+        "description": "3. The user should be able to update the details of a task in the TODO list",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of task"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "status": {
+                    "type": "string",
+                    "required": true,
+                    "enum": ["Completed", "Open", "In Progress"]
+                  }
+                },
+                "example": {
+                  "title": "Buy Groceries Updated",
+                  "description": "To buy groceries at the store Updated",
+                  "status": "In Progress"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete task",
+        "tags": ["Tasks"],
+        "description": "4. The user should be able to remove a task from the TODO list",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of task"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task deleted"
+          }
+        }
+      }
+    },
+    "/api/tasks/reorder": {
+      "post": {
+        "summary": "Reorder task",
+        "tags": ["Tasks"],
+        "description": "5. The user should be able to reorder the tasks in the TODO list \n 6. A task in the TODO list should be able to handle being moved more than 50 times \n 7. A task in the TODO list should be able to handle being moved to more than one task away from its current position",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "position": {
+                    "type": "number",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "id": "d2b2cc28-02e3-4d5d-875a-caf94d2e5203",
+                  "position": 2
+                }
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Task reordered"
+          }
+        }
+      }
+    }
+  }
+}
